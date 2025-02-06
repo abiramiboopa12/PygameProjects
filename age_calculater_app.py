@@ -1,0 +1,32 @@
+from tkinter import *
+from datetime import date
+def calculate_age():
+    try:
+        day = int(day_entry.get())
+        month = int(month_entry.get())
+        year = int(year_entry.get())
+        birth_date = date(year, month, day)
+        today = date.today()
+        age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+        result_label.config(text=f"Your age is: {age} years")
+    except ValueError:
+        result_label.config(text="Invalid input. Please enter valid numbers.")
+root = Tk()
+root.title("Age Calculator")
+root.geometry("400x300")
+Label(root, text="Enter your date of birth:", font=("Arial", 14)).pack(pady=10)
+frame = Frame(root)
+frame.pack(pady=10)
+Label(frame, text="Day:", font=("Arial", 12)).grid(row=0, column=0, padx=5, pady=5)
+day_entry = Entry(frame, width=5)
+day_entry.grid(row=0, column=1, padx=5, pady=5)
+Label(frame, text="Month:", font=("Arial", 12)).grid(row=0, column=2, padx=5, pady=5)
+month_entry = Entry(frame, width=5)
+month_entry.grid(row=0, column=3, padx=5, pady=5)
+Label(frame, text="Year:", font=("Arial", 12)).grid(row=0, column=4, padx=5, pady=5)
+year_entry = Entry(frame, width=5)
+year_entry.grid(row=0, column=5, padx=5, pady=5)
+Button(root, text="Calculate Age", command=calculate_age, font=("Arial", 12)).pack(pady=20)
+result_label = Label(root, text="", font=("Arial", 14))
+result_label.pack(pady=10)
+root.mainloop()
